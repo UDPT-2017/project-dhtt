@@ -1,0 +1,25 @@
+{
+  "name": "project-dhtt",
+  "version": "0.0.0",
+  "description": "**Name of your app** là repository cho đồ án nhóm. Nhóm tối đa 4 thành viên.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/UDPT-2017/project-dhtt.git"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/UDPT-2017/project-dhtt/issues"
+  },
+  "dependencies": {
+    "express": "~4.15.3",
+    "pg": "~6.2.4",
+    "body-parser": "~1.17.2",
+    "db-migrate": "~0.10.0-beta.20",
+    "ect": "~0.5.9"
+  }
+}
