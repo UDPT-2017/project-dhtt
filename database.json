@@ -1,0 +1,10 @@
+{
+  "dev": {
+    "host": "localhost",
+    "user": "postgres",
+    "password" : "",
+    "database": "projectUDPT",
+    "driver": "pg",
+    "multipleStatements": true
+  }
+}
