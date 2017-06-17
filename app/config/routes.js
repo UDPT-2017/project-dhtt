@@ -1,5 +1,6 @@
 var aboutController = require('../controllers/aboutController');
 var categoriesController = require('../controllers/categoriesController');
+var usersController = require('../controllers/usersController');
 
 var configRoutes = function(app){
   app.get('/', function(req, res){
@@ -15,6 +16,10 @@ var configRoutes = function(app){
   app.get('/admin/categories/:id/edit', categoriesController.getCategory);
   app.post('/admin/categories/:id/edit', categoriesController.edit);
   app.get('/admin/categories/:search_string', categoriesController.category_search);
+
+  app.get('/admin/users', usersController.index);
+  app.delete('/admin/users/:id', usersController.delete);
+  app.get('/admin/users/:search_string', usersController.user_search);
 };
 
 module.exports = configRoutes;
