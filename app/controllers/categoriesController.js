@@ -64,7 +64,7 @@ var categoriesController = {
         res.render('admin/categories/edit', {category: result.rows[0]});
       }
       else{
-
+        res.send(404, "Not found");
       }
     })
   },
@@ -73,9 +73,16 @@ var categoriesController = {
     var name = req.body.name;
     var description = req.body.description;
     var message = {};
-    if(validator.isEmpty(name) || validator.isEmpty(description)){
+    if(validator.isEmpty(name)){
       message.error = "Name or description cannot blank!";
-      res.render('admin/categories/edit', {message: message});
+      categories.getCategory(id, function(result){
+        if(result){
+          res.render('admin/categories/edit', {category: result.rows[0], message: message});
+        }
+        else{
+          res.send(404, "Not found");
+        }
+      })
     }
     else{
       var category = {};
@@ -85,7 +92,14 @@ var categoriesController = {
       categories.edit(category, function(error){
         if(error){
           message.error = "Edit category failed!";
-          res.render('admin/categories/edit', {message: message})
+          categories.getCategory(id, function(result){
+            if(result.rowCount > 0){
+              res.render('admin/categories/edit', {category: result.rows[0], message: message});
+            }
+            else{
+              res.send(404, "Not found");
+            }
+          })
         }
         else{
           res.redirect('/admin/categories');
