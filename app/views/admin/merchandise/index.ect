@@ -1,0 +1,116 @@
+<% extend '../views/admin/dashboard/layout' %>
+<div class="row">
+  <div class="col-md-6">
+      <label for="recipient-name" class="control-label">Category</label>
+      <select id="category_id" name="category_id">
+        <option value = "0" id="category_id" name="category_id">
+          All
+        </option>
+        <% for category in @categories : %>
+          <option value="<%= category.id %>" id="category_id" name="category_id">
+            <%= category.name %>
+          </option>
+        <% end %>
+      </select>
+    <button type="submit" class="btn btn-primary" id="filter_merchandise">Filter</button>
+  </div>
+  <div class="col-md-6 col-offset-md-6">
+    <input type="search" name="q" placeholder="Search" id="string_search">
+    <input type="submit" value="Search" id="merchandise_search">
+  </div>
+</div>
+<br/>
+<table class="table">
+  <thead class="thead-inverse">
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Category</th>
+      <th>Image</th>
+      <th>Manage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @merchandise?.length : %>
+      <% for item in @merchandise : %>
+        <tr >
+          <th scope="row"><%= item.rnum %></th>
+          <td><%= item.name %></td>
+          <td><%= item.description %></td>
+          <td><%= item.price %></td>
+          <td><%= item.category_name %>
+          <td>
+            <% if item.image : %>
+              <p> <img class = "face2" src="../uploads/<%= item.image %>"
+                style="width:200px;height:200px;border:1"> </p>
+            <% else : %>
+              <p> <img class = "face2" src="../images/no-image.png"
+                style="width:200px;height:200px;border:1"> </p>
+            <% end %>
+          </td>
+          <td>
+            <div class="row">
+              <div class="col-md-2">
+                <form class="form-horizontal" role="form" method="get"
+                action="merchandise/<%= item.id %>/edit">
+                  <button type="submit" class="btn btn-secondary">Edit</button>
+                </form>
+              </div>
+              <div class="col-md-6 col-offset-md-2">
+                <button type="button" class="btn btn-danger delete_merchandise"
+                  data-id="<%= item.id %>">Delete</button>
+              </div>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+<button type="button" class="btn btn-primary" data-toggle="modal"
+  data-target="#addMerchandise" data-whatever="@mdo">Add</button>
+
+<div class="modal fade" id="addMerchandise" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">New item</h4>
+      </div>
+      <div class="modal-body">
+        <form method="post" enctype="multipart/form-data" action="/admin/merchandise">
+          <div class="form-group">
+            <label for="recipient-name" class="control-label">Category</label>
+            <select id="cate_id" name="cate_id">
+              <% for cate in @categories : %>
+                <option value="<%= cate.id %>" id="cate_id" name="cate_id">
+                  <%= cate.name %>
+                </option>
+              <% end %>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="control-label">Name</label>
+            <input type="text" class="form-control" id="name" name="name">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="control-label">Description</label>
+            <textarea class="form-control" id="description" name="description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="control-label">Price</label>
+            <input type="text" class="form-control" id="price" name="price">
+          </div>
+          <div class="form-group">
+            <input type="file" name="file" class="form-control" id="file">
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" id="create_merchandise">Create</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

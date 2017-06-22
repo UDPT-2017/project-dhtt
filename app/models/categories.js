@@ -33,6 +33,7 @@ var categories = {
   edit: function(category, callback){
     pg.connect(connect, function(err, client, done){
       client.query("UPDATE categories SET name = $1, description = $2 WHERE id = $3", [category.name, category.description, category.id], function(error, result){
+        console.log("er" + error);
         callback(error);
       });
     });

@@ -2,10 +2,11 @@ var express = require('express'),
   bodyParser = require('body-parser'),
   pg = require('pg'),
   ect = require('ect'),
-  app = express();
+  app = express(),
+  path = require('path');
 
-var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true}));
+app.use(bodyParser({ uploadDir: path.join(__dirname, 'files'), keepExtensions: true }));
 
 require('./app/config/express')(app);
 require('./app/config/routes')(app);
