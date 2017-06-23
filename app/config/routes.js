@@ -29,7 +29,9 @@ var configRoutes = function(app){
   app.get('/admin/merchandise/:id/edit', merchandiseController.getMerchandise);
   app.post('/admin/merchandise/:id/edit', upload.any(), merchandiseController.edit);
   app.get('/admin/merchandise/:search_string', merchandiseController.merchandise_search);
+
   app.get('/categories/:id/merchandise', homeController.categories_merchandise);
+  app.get('/merchandise/:id', merchandiseController.showMerchandise);
 };
 
 module.exports = configRoutes;
