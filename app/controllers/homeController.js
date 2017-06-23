@@ -11,18 +11,18 @@ var homeController = {
           if(categories){
             merchandise.bargain(function(bargain){
               if(bargain){
-                res.render('home', {merchandise: items.rows, categories: categories.rows, bargains: bargain.rows, url: url});
+                res.render('home', {merchandise: items.rows, categories: categories.rows, bargains: bargain.rows, url: url, user: req.user});
               }
             })
 
           }
           else{
-            res.render('home', {merchandise: merchandise.rows, categories: '', bargains: ''});
+            res.render('home', {merchandise: merchandise.rows, categories: '', bargains: '',  user: req.user});
           }
         })
       }
       else{
-        res.render('home');
+        res.render('home', {user: req.user});
       }
     })
   },
@@ -33,10 +33,10 @@ var homeController = {
       if(items){
         categories.index(function(categories){
           if(categories){
-            res.render('merchandise/merchandise_category', {merchandise: items.rows, categories: categories.rows, url: url});
+            res.render('merchandise/merchandise_category', {merchandise: items.rows, categories: categories.rows, url: url, user: req.user});
           }
           else{
-            res.render('home', {merchandise: merchandise.rows, categories: '', url: url});
+            res.render('home', {merchandise: merchandise.rows, categories: '', url: url, user: req.user});
           }
         })
       }
