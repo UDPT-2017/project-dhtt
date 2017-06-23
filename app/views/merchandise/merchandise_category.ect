@@ -1,0 +1,42 @@
+<% extend '../views/shared/layout' %>
+
+<div class="row" >
+<div class="new-products">
+    <div class="container">
+      <h3><%= @merchandise[0].category_name %></h3>
+      <div class="agileinfo_new_products_grids">
+        <% for item in @merchandise : %>
+        <div class="col-md-3 agileinfo_new_products_grid">
+          <div class="agile_ecommerce_tab_left agileinfo_new_products_grid1">
+            <div class="hs-wrapper hs-wrapper1">
+              <% if item.image : %>
+                <img src="<%= @url %>/uploads/<%= item.image %>" alt=" " class="img-responsive" />
+              <% else : %>
+                <img src="<%= @url %>/images/no-image.png" alt=" " class="img-responsive" />
+              <% end %>
+              <div class="w3_hs_bottom w3_hs_bottom_sub">
+                <ul>
+                  <li>
+                    <a href="#" data-toggle="modal" data-target="#myModal6"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <h5><a href="single.html"><%= item.name %></a></h5>
+            <div class="simpleCart_shelfItem">
+              <% if item.discount : %>
+                <p><span>$<%= item.price %></span> <i class="item_price">$<%= item.discount %></i></p>
+                <p><a class="item_add" href="#">Add to cart</a></p>
+              <% else : %>
+                <p><i class="item_price">$<%= item.price %></i></p>
+                <p><a class="item_add" href="#">Add to cart</a></p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <% end %>
+        <div class="clearfix"> </div>
+      </div>
+    </div>
+  </div>
+</div>

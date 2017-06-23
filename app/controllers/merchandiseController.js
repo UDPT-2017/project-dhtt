@@ -186,7 +186,7 @@ var merchandiseController = {
         })
       }
     }
-  },
+  }
 }
 
 module.exports = merchandiseController;
