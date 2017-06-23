@@ -22,7 +22,7 @@
                 </ul>
               </div>
             </div>
-            <h5><a href="single.html"><%= item.name %></a></h5>
+            <h5><a href="<%= @url %>/merchandise/<%= item.id %>"><%= item.name %></a></h5>
             <div class="simpleCart_shelfItem">
               <% if item.discount : %>
                 <p><span>$<%= item.price %></span> <i class="item_price">$<%= item.discount %></i></p>
