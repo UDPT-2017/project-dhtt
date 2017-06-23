@@ -4,7 +4,7 @@ var connect = "postgres://postgres@localhost:5432/projectUDPT";
 var merchandise = {
   index: function(callback){
     pg.connect(connect, function(err, client, done){
-        client.query("SELECT row_number() OVER () as rnum, c.name as category_name, c.id as category_id, m.* FROM categories c join merchandise m on m.category_id = c.id", function(error, result){
+        client.query("SELECT row_number() OVER () as rnum, c.name as category_name, c.id as category_id, m.* FROM categories c join merchandise m on m.category_id = c.id ORDER BY m.id DESC", function(error, result){
           callback(result);
         });
       });
@@ -56,6 +56,20 @@ var merchandise = {
     pg.connect(connect, function(err, client, done){
         client.query("INSERT INTO merchandise(name, description, price, category_id, image) VALUES($1, $2, $3, $4, $5) ", [item.name, item.description, item.price, item.category_id, item.image], function(error, result){
           callback(error);
+        });
+      });
+  },
+  home: function(callback){
+    pg.connect(connect, function(err, client, done){
+        client.query("SELECT row_number() OVER () as rnum, m.*, m.price FROM merchandise m left join promotions p on p.merchandise_id = m.id ORDER BY m.id DESC", function(error, result){
+          callback(result);
+        });
+      });
+  },
+  bargain: function(callback){
+    pg.connect(connect, function(err, client, done){
+        client.query("SELECT row_number() OVER () as rnum, m.*, m.price FROM merchandise m join promotions p on p.merchandise_id = m.id ORDER BY m.id DESC", function(error, result){
+          callback(result);
         });
       });
   }

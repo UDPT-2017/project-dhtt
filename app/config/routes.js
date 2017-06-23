@@ -2,13 +2,12 @@ var aboutController = require('../controllers/aboutController');
 var categoriesController = require('../controllers/categoriesController');
 var usersController = require('../controllers/usersController');
 var merchandiseController = require('../controllers/merchandiseController');
+var homeController = require('../controllers/homeController');
 var multer  = require('multer');
 var upload = multer({ dest: 'app/public/uploads/'});
 
 var configRoutes = function(app){
-  app.get('/', function(req, res){
-    res.render('home');
-  });
+  app.get('/', homeController.index);
   app.get('/about', aboutController.getAbout);
   app.get('/admin', function(req, res){
     res.render('admin/dashboard/dashboard');
@@ -30,6 +29,7 @@ var configRoutes = function(app){
   app.get('/admin/merchandise/:id/edit', merchandiseController.getMerchandise);
   app.post('/admin/merchandise/:id/edit', upload.any(), merchandiseController.edit);
   app.get('/admin/merchandise/:search_string', merchandiseController.merchandise_search);
+  app.get('/categories/:id/merchandise', homeController.categories_merchandise);
 };
 
 module.exports = configRoutes;
