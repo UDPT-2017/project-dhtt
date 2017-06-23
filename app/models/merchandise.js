@@ -72,6 +72,22 @@ var merchandise = {
           callback(result);
         });
       });
+  },
+  showMerchandise: function(id, date, callback){
+    pg.connect(connect, function(err, client, done){
+      client.query("SELECT * FROM promotions WHERE date between start_date AND end_date WHERE category_id = $1",[id], function(promotion, err){
+        if(promotion.rowCount > 0){
+          client.query("SELECT m.*, m.price - m.price * p.discount AS discount FROM promotions p right join merchandise m on m.id = p.merchandise_id WHERE m.id = $1 and p.start_date >= $2 AND p.end_date <= $2", [id, date], function(error, result){
+            callback(result);
+          });
+        }
+        else{
+          client.query("SELECT m.* FROM merchandise m WHERE m.id = $1", [id], function(error, result){
+            callback(result);
+          });
+        }
+      })
+      });
   }
 }
 module.exports = merchandise;
