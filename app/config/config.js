@@ -7,9 +7,9 @@ module.exports={
   "facebook_api_key"    :       "487015711643772",
   "facebook_api_secret" :       "7797fa4440353b54bda5d5be0d6e40ee",
   "callback_url"        :       "http://localhost:3000/auth/facebook/callback",
-  "use_database"        :       "false",
-  "host"                :       "localhost",
-  "username"            :       "root",
-  "password"            :       "",
-  "database"            :       ""
+  "use_database"        :       "true",
+  "host"                :       "localhost:5432",
+  "username"            :       "postgres",
+  "password"            :       "123456",
+  "database"            :       "projectUDPT"
 };
