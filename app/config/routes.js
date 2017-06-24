@@ -4,6 +4,7 @@ var usersController = require('../controllers/usersController');
 var merchandiseController = require('../controllers/merchandiseController');
 var homeController = require('../controllers/homeController');
 var promotionsController = require('../controllers/promotionController');
+var userSignupController = require('../controllers/userSignupController');
 var multer  = require('multer');
 var upload = multer({ dest: 'app/public/uploads/'});
 
@@ -40,6 +41,11 @@ var configRoutes = function(app){
   app.get('/admin/promotions/:id/edit', promotionsController.getPromotions);
   app.post('/admin/promotions/:id/edit', promotionsController.edit);
   app.get('/admin/promotions/:search_string', promotionsController.promotions_search);
+
+  app.get('/signup', function(req, res){
+    res.render('signup');
+  });
+  app.post('/signup', userSignupController.signup);
 };
 
 module.exports = configRoutes;
