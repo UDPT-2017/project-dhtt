@@ -5,6 +5,7 @@ var merchandiseController = require('../controllers/merchandiseController');
 var homeController = require('../controllers/homeController');
 var promotionsController = require('../controllers/promotionController');
 var userSignupController = require('../controllers/userSignupController');
+var sessionsController = require('../controllers/sessionsController');
 var multer  = require('multer');
 var upload = multer({ dest: 'app/public/uploads/'});
 
@@ -46,6 +47,8 @@ var configRoutes = function(app){
     res.render('signup');
   });
   app.post('/signup', userSignupController.signup);
+
+  app.post('/login', sessionsController.login);
 };
 
 module.exports = configRoutes;
