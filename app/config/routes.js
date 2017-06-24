@@ -49,6 +49,7 @@ var configRoutes = function(app){
   app.post('/signup', userSignupController.signup);
 
   app.post('/login', sessionsController.login);
+  app.get('/logout', sessionsController.logout);
 };
 
 module.exports = configRoutes;
