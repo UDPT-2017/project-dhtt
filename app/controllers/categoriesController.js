@@ -26,6 +26,7 @@ var categoriesController = {
       category.name = name;
       category.description = description;
       categories.create(category, function(error){
+        console.log(error);
         if(error){
           message.error = "Create category failed!";
           res.render('admin/categories/index', {message: message})

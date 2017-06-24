@@ -96,7 +96,7 @@ var merchandiseController = {
     item.price = req.body.price;
     item.category_id = req.body.cate_id;
     console.log(req.files);
-    if(req.files){
+    if(typeof req.files =="undefined"){
       item.image = req.files[0].filename;
     }
     var message = {};
