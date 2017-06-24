@@ -1,5 +1,5 @@
 var pg = require('pg');
-var connect = "postgres://postgres:01655869381@localhost:5432/projectUDPT";
+var connect = "postgres://postgres:yeuladau@localhost:5432/projectUDPT";
 
 var userSignup = {
   signup: function(user, callback){
@@ -14,6 +14,13 @@ var userSignup = {
     {
       callback(error);
     }
+  },
+  findOneUser: function(email, callback){
+    pg.connect(connect, function(err, client, done){
+      client.query("SELECT * FROM users WHERE email = $1", [email], function(error, result){
+        callback(result);
+      });
+    })
   }
 }
 module.exports = userSignup;
