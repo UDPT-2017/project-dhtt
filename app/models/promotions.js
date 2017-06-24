@@ -1,5 +1,5 @@
 var pg = require('pg');
-var connect = "postgres://postgres:yeuladau@localhost:5432/projectUDPT";
+var connect = "postgres://postgres:123456@localhost:5432/projectUDPT";
 
 var promotions = {
   index: function(callback){
