@@ -12,7 +12,7 @@ var express = require('express'),
   config = require('./app/config/config');
 
 
-//Connection string of the database (postgres) used for fb-login 
+//Connection string of the database (postgres) used for fb-login
 var connection = "postgres://"+config.username+":"+config.password+"@"+config.host+"/"+config.database+"";
 
 
@@ -46,12 +46,12 @@ passport.use(new FacebookStrategy({
               console.log("There is no such user, adding now");
               if(!profile.name.middleName)
               {
-                client.query("INSERT into users(name, password, email, is_admin) VALUES($1, $2, $3, 'false')", 
+                client.query("INSERT into users(name, password, email, is_admin) VALUES($1, $2, $3, 'false')",
                   [profile.name.givenName + " " + profile.name.familyName, profile.id, profile.emails[0].value]);
               }
               else
               {
-                client.query("INSERT into users(name, password, email, is_admin) VALUES($1, $2, $3, 'false')", 
+                client.query("INSERT into users(name, password, email, is_admin) VALUES($1, $2, $3, 'false')",
                   [profile.name.givenName + " " + profile.name.middleName + " " + profile.name.familyName, profile.id, profile.emails[0].value]);
               }
             }
@@ -67,10 +67,6 @@ passport.use(new FacebookStrategy({
   }
 ));
 
-
-app.use(bodyParser.urlencoded({ extended: true}));
-app.use(bodyParser({ uploadDir: path.join(__dirname, 'files'), keepExtensions: true }));
-app.use(session({secret: 'max', resave: false, saveUninitialized: true}));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.use(cookieParser());

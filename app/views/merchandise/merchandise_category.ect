@@ -27,10 +27,10 @@
             <div class="simpleCart_shelfItem">
               <% if item.discount : %>
                 <p><span>$<%= item.price %></span> <i class="item_price">$<%= item.discount %></i></p>
-                <p><a class="item_add" href="#">Add to cart</a></p>
+                <p><a class="item_add" href="#" id="<%= item.id %>">Add to cart</a></p>
               <% else : %>
                 <p><i class="item_price">$<%= item.price %></i></p>
-                <p><a class="item_add" href="#">Add to cart</a></p>
+                <p><a class="item_add" href="#" id="<%= item.id %>">Add to cart</a></p>
               <% end %>
             </div>
           </div>

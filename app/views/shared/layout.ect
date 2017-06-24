@@ -20,7 +20,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link rel="stylesheet" href="/css/jquery.countdown.css" />
 <!-- //countdown -->
 <!-- cart -->
-<script src="<%= @url %>/js/simpleCart.min.js"></script>
+
 <!-- cart -->
 <!-- for bootstrap working -->
 <script type="text/javascript" src="<%= @url %>/js/bootstrap-3.1.1.min.js"></script>
@@ -67,7 +67,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                           <input name="email" placeholder="Email Address" type="text" required="">
                           <input name="password" placeholder="Password" type="password" required="">
                           <div class="sign-up">
-                            <% if typeof session == "undefined" || session == null : %>
+                            <% if typeof session == "undefined" || session == null || (session != null && typeof session.user == "undefined") : %>
                               <input type="submit" value="Sign in"/>
                             <% else : %>
                               <ul class="nav navbar-right top-nav" style="margin-top: -165px;">
@@ -158,7 +158,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   <% unless @user : %>
   <% end %>
   <div class="header">
-    <div class="container">          
+    <div class="container">
       <div class="w3l_login">
         <a href="#" data-toggle="modal" data-target="#myModal88"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
       </div>
@@ -178,10 +178,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
       <div class="cart box_1">
         <a href="checkout.html">
           <div class="total">
-          <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)</div>
-          <img src="<%= @url %>/images/bag.png" alt="" />
+          <% if (typeof session != "undefined") && session.item : %>
+            <span class="simpleCart_total"></span><span id="simpleCart_quantity" class="simpleCart_quantity"><%= session.item.length %></span> items</div>
+            <img src="<%= @url %>/images/bag.png" alt="" />
+          <% else : %>
+            <span class="simpleCart_total"></span><span id="simpleCart_quantity"
+              class="simpleCart_quantity">0</span> item</div>
+            <img src="<%= @url %>/images/bag.png" alt="" />
+            <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
+          <% end %>
         </a>
-        <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
         <div class="clearfix"> </div>
       </div>
       <div class="clearfix"> </div>
@@ -325,6 +331,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         .removeClass('active');
     })
 </script>
+  <script src="<%= @url %>/js/cart.js"></script>
 <!-- //footer -->
 </body>
 

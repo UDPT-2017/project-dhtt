@@ -37,7 +37,8 @@ $(document).ready(function(event){
   });
 
   $('#category_search').on("click", function(){
-    $.ajax({
+    if($('#string_search').val()){
+      $.ajax({
       url: '/admin/categories/' + $('#string_search').val(),
       type: 'get',
       contentType: 'application/json',
@@ -58,6 +59,11 @@ $(document).ready(function(event){
                 ')
             });
           }
-    });
+    })
+    }
+    else{
+      window.location.href = '/admin/categories';
+    }
+
   });
 });
