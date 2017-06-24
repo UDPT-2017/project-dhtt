@@ -30,6 +30,12 @@ var sessionsController = {
           res.render('sessions/new', {message: message});
         }
     });
+  },
+  logout: function(req, res){
+    message = {};
+    session = null;
+    message.success = "Log out successfully!";
+    res.redirect('/');
   }
 }
 
