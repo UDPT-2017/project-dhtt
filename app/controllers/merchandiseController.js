@@ -96,7 +96,7 @@ var merchandiseController = {
     item.price = req.body.price;
     item.category_id = req.body.cate_id;
     console.log(req.files);
-    if(req.files){
+    if(typeof req.files =="undefined"){
       item.image = req.files[0].filename;
     }
     var message = {};
@@ -186,6 +186,27 @@ var merchandiseController = {
         })
       }
     }
+  },
+  showMerchandise: function(req, res){
+    var id = req.params.id;
+    var url = req.protocol + '://' + req.get('host');
+    var date = new Date();
+    var message = {};
+    merchandise.showMerchandise(id, date, function(items){
+      if(items){
+        categories.index(function(cate){
+          if(cate){
+            res.render('merchandise/show', {merchandise: items.rows[0], categories: cate.rows, url: url});
+          }
+          else{
+            res.render('merchandise/show', {merchandise: items.rows[0], categories: '', url: url});
+          }
+        })
+      }
+      else{
+        res.send(404, 'Not found');
+      }
+    })
   }
 }
 

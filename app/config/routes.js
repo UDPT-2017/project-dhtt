@@ -3,6 +3,9 @@ var categoriesController = require('../controllers/categoriesController');
 var usersController = require('../controllers/usersController');
 var merchandiseController = require('../controllers/merchandiseController');
 var homeController = require('../controllers/homeController');
+var promotionsController = require('../controllers/promotionController');
+var userSignupController = require('../controllers/userSignupController');
+var sessionsController = require('../controllers/sessionsController');
 var multer  = require('multer');
 var upload = multer({ dest: 'app/public/uploads/'});
 
@@ -29,7 +32,24 @@ var configRoutes = function(app){
   app.get('/admin/merchandise/:id/edit', merchandiseController.getMerchandise);
   app.post('/admin/merchandise/:id/edit', upload.any(), merchandiseController.edit);
   app.get('/admin/merchandise/:search_string', merchandiseController.merchandise_search);
+
   app.get('/categories/:id/merchandise', homeController.categories_merchandise);
+  app.get('/merchandise/:id', merchandiseController.showMerchandise);
+
+  app.get('/admin/promotions', promotionsController.index);
+  app.post('/admin/promotions', promotionsController.create);
+  app.delete('/admin/promotions/:id', promotionsController.delete);
+  app.get('/admin/promotions/:id/edit', promotionsController.getPromotions);
+  app.post('/admin/promotions/:id/edit', promotionsController.edit);
+  app.get('/admin/promotions/:search_string', promotionsController.promotions_search);
+
+  app.get('/signup', function(req, res){
+    res.render('signup');
+  });
+  app.post('/signup', userSignupController.signup);
+
+  app.post('/login', sessionsController.login);
+  app.get('/logout', sessionsController.logout);
 };
 
 module.exports = configRoutes;

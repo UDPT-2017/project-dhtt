@@ -1,5 +1,5 @@
 var pg = require('pg');
-var connect = "postgres://postgres:123456@localhost:5432/projectUDPT";
+var connect = "postgres://postgres:yeuladau@localhost:5432/projectUDPT";
 
 var merchandise = {
   index: function(callback){
@@ -71,6 +71,22 @@ var merchandise = {
         client.query("SELECT row_number() OVER () as rnum, m.*, m.price FROM merchandise m join promotions p on p.merchandise_id = m.id ORDER BY m.id DESC", function(error, result){
           callback(result);
         });
+      });
+  },
+  showMerchandise: function(id, date, callback){
+    pg.connect(connect, function(err, client, done){
+      client.query("SELECT * FROM promotions WHERE date between start_date AND end_date WHERE category_id = $1",[id], function(promotion, err){
+        if(promotion.rowCount > 0){
+          client.query("SELECT m.*, m.price - m.price * p.discount AS discount FROM promotions p right join merchandise m on m.id = p.merchandise_id WHERE m.id = $1 and p.start_date >= $2 AND p.end_date <= $2", [id, date], function(error, result){
+            callback(result);
+          });
+        }
+        else{
+          client.query("SELECT m.* FROM merchandise m WHERE m.id = $1", [id], function(error, result){
+            callback(result);
+          });
+        }
+      })
       });
   }
 }

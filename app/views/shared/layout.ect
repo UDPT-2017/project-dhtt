@@ -63,11 +63,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                   <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
                     <div class="facts">
                       <div class="register">
-                        <form action="#" method="post">
-                          <input name="Email" placeholder="Email Address" type="text" required="">
-                          <input name="Password" placeholder="Password" type="password" required="">
+                        <form action="/login" method="post">
+                          <input name="email" placeholder="Email Address" type="text" required="">
+                          <input name="password" placeholder="Password" type="password" required="">
                           <div class="sign-up">
+                            <% if typeof session == "undefined" || session == null : %>
                             <input type="submit" value="Sign in"/>
+                            <% else : %>
+                              <ul class="nav navbar-right top-nav" style="margin-top: -165px;">
+                                  <li class="dropdown">
+                                    <a href="/logout"><i class="fa fa-fw fa-power-off"></i> Log Out, <%= session.user.name %></a>
+                              </ul>
+                            <% end %>
                           </div>
                         </form>
                       </div>
@@ -77,11 +84,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                   <div class="tab-2 resp-tab-content" aria-labelledby="tab_item-1">
                     <div class="facts">
                       <div class="register">
-                        <form action="#" method="post">
-                          <input placeholder="Name" name="Name" type="text" required="">
-                          <input placeholder="Email Address" name="Email" type="email" required="">
-                          <input placeholder="Password" name="Password" type="password" required="">
-                          <input placeholder="Confirm Password" name="Password" type="password" required="">
+                          <% if @message : %>
+                            <% if @message.error : %>
+                              <p class="alert alert-danger">
+                                <%= @message.error %>
+                              </p>
+                            <% else : %>
+                              <p class="alert alert-success">
+                                <%= @message.success %>
+                              </p>
+                            <% end %>
+                          <% end %>
+                        <form action="/signup" method="post">
+                          <input placeholder="Name" name="name" type="text" required="">
+                          <input placeholder="Email Address" name="email" type="email" required="">
+                          <input placeholder="Password" name="password" type="password" required="">
+                          <input placeholder="Phone" name="phone" type="text" required="">
                           <div class="sign-up">
                             <input type="submit" value="Create Account"/>
                           </div>
@@ -126,12 +144,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
   </div>
   <% unless @user : %>
-  <script>
-      $('#myModal88').modal('show'); 
-  </script>
   <% end %>
   <div class="header">
-    <div class="container">
+    <div class="container">          
       <div class="w3l_login">
         <a href="#" data-toggle="modal" data-target="#myModal88"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
       </div>
