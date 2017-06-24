@@ -3,6 +3,7 @@
 <div class="row" >
 <div class="new-products">
     <div class="container">
+    <% if @merchandise?.length : %>
       <h3><%= @merchandise[0].category_name %></h3>
       <div class="agileinfo_new_products_grids">
         <% for item in @merchandise : %>
@@ -38,5 +39,6 @@
         <div class="clearfix"> </div>
       </div>
     </div>
+    <% end %>
   </div>
 </div>
