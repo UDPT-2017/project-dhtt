@@ -84,7 +84,8 @@ Các **yêu cầu chức năng** (check và ghi MSSV vào các phần chức nă
 * [x] Trang web được thiết kế sẽ bao gồm các trang: home, product, about us. mail us.
 * [x] Thiết kế trang web theo responsive với bootstrap với header (navigation bar, logo), left menu, footer và content. 
 * [x] Quản lý các thay đổi trong cơ sở dữ liệu (sử dụng db-migrate)
-Phân hệ admin:
+* [x] Quản lý database config(1312169)
+## Phân hệ admin:
 * [x] Đăng nhập vào trang quản lý admin bằng email và password(1312660)
 * [x] Đăng xuất khỏi trang admin(1312660)
 * [x] Ở trang dashboard admin cho phép người dùng biết họ đang ở trang nào (sử dụng breadcrumb, highlight navigation bar,...)(1312660)
@@ -93,7 +94,7 @@ Phân hệ admin:
 * [x] Cài đặt các chức năng thêm, xóa, sửa dữ liệu ở mục merchandise trong trang admin(1312071)
 * [x] Cài đặt các chức năng xem, xóa dữ liệu ở mục users trong trang admin(1312071)
 * [x] Cài đặt các chức năng thêm, xóa, sửa dữ liệu ở mục categories trong trang admin(1312071)
-Phân hệ user và guest:
+## Phân hệ user và guest:
 * [x] Đăng ký tài khoản(1312660)
 * [x] Đăng nhập bằng email và password(1312632)
 * [x] Đăng xuất tài khoản khi người dùng đăng nhập(1312632)
@@ -107,7 +108,7 @@ Phân hệ user và guest:
 
 Link ảnh GIF demo ứng dụng:
 
-![Video Walkthrough](demo.gif)
+![Video Walkthrough](https://github.com/UDPT-2017/project-dhtt/blob/develop/demo.gif)
 
 Tạo ảnh GIF với chương trình [LiceCap](http://www.cockos.com/licecap/).
 

@@ -1,5 +1,6 @@
 var pg = require('pg');
-var connect = "postgres://postgres:01655869381@localhost:5432/projectUDPT";
+var config = require('../config/config');
+var connect = "postgres://"+config.username+":"+config.password+"@"+config.host+"/"+config.database+"";
 
 var cart = {
   index: function(items, callback){
