@@ -201,7 +201,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
         <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="/" class="act">Home</a></li>
+            <li class="#"><a href="/" class="act">Home</a></li>
             <!-- Mega Menu -->
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Products <b class="caret"></b></a>
@@ -316,6 +316,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
       </div>
     </div>
   </div>
+<script type="text/javascript">
+    $(function(){
+    $('.nav li > a[href="' + document.location.pathname + '"]')
+        .parent()
+        .addClass('active')
+        .siblings()
+        .removeClass('active');
+    })
+</script>
 <!-- //footer -->
 </body>
+
 </html>

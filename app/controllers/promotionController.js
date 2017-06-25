@@ -7,6 +7,11 @@ var dateformat = require('dateformat');
 
 var promotionController = {
   index: function(req, res){
+    if(typeof session == "undefined" || session == null)
+    {
+      res.redirect('login');
+    }
+    else {
     promotions.index(function(items){
       if(items){
         merchandise.index(function(merchandise){
@@ -22,6 +27,7 @@ var promotionController = {
         res.render('admin/promotions/index', {user: req.user});
       }
     })
+  }
   },
   delete: function(req, res){
     var id = req.params.id;

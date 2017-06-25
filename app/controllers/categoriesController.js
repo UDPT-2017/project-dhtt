@@ -4,6 +4,11 @@ var validator = require('validator');
 
 var categoriesController = {
   index: function(req, res){
+    if(typeof session == "undefined" || session == null)
+    {
+      res.redirect('login');
+    }
+    else {
     categories.index(function(categories){
       if(categories.rowCount > 0){
         res.render('admin/categories/index', {categories: categories.rows, user: req.user});
@@ -12,6 +17,7 @@ var categoriesController = {
         res.render('admin/categories/index', {user: req.user});
       }
     })
+  }
   },
   create: function(req, res){
     var name = req.body.name;
