@@ -6,10 +6,10 @@ var categoriesController = {
   index: function(req, res){
     categories.index(function(categories){
       if(categories.rowCount > 0){
-        res.render('admin/categories/index', {categories: categories.rows});
+        res.render('admin/categories/index', {categories: categories.rows, user: req.user});
       }
       else{
-        res.render('admin/categories/index');
+        res.render('admin/categories/index', {user: req.user});
       }
     })
   },
@@ -19,7 +19,7 @@ var categoriesController = {
     var message = {};
     if(validator.isEmpty(name) || validator.isEmpty(description)){
       message.error = "Name or description cannot blank!";
-      res.render('admin/categories/index', {message: message});
+      res.render('admin/categories/index', {message: message, user: req.user});
     }
     else{
       var category = {};
@@ -29,10 +29,10 @@ var categoriesController = {
         console.log(error);
         if(error){
           message.error = "Create category failed!";
-          res.render('admin/categories/index', {message: message})
+          res.render('admin/categories/index', {message: message, user: req.user})
         }
         else{
-          res.redirect('/admin/categories');
+          res.redirect('/admin/categories', {user: req.user});
         }
       })
     }
@@ -43,7 +43,7 @@ var categoriesController = {
     categories.delete(id, function(error){
       if(error){
         message.error = "Delete failed";
-        res.render('admin/categories/index', {message: message});
+        res.render('admin/categories/index', {message: message, user: req.user});
       }
       else{
         categories.index(function(categories){
@@ -51,7 +51,7 @@ var categoriesController = {
             res.send({categories: categories.rows});
           }
           else{
-            res.render('admin/categories/index');
+            res.render('admin/categories/index', {user: req.user});
           }
         })
       }
@@ -62,7 +62,7 @@ var categoriesController = {
     var message = {};
     categories.getCategory(id, function(result){
       if(result){
-        res.render('admin/categories/edit', {category: result.rows[0]});
+        res.render('admin/categories/edit', {category: result.rows[0], user: req.user});
       }
       else{
         res.send(404, "Not found");
@@ -78,7 +78,7 @@ var categoriesController = {
       message.error = "Name or description cannot blank!";
       categories.getCategory(id, function(result){
         if(result){
-          res.render('admin/categories/edit', {category: result.rows[0], message: message});
+          res.render('admin/categories/edit', {category: result.rows[0], message: message, user: req.user});
         }
         else{
           res.send(404, "Not found");
@@ -95,7 +95,7 @@ var categoriesController = {
           message.error = "Edit category failed!";
           categories.getCategory(id, function(result){
             if(result.rowCount > 0){
-              res.render('admin/categories/edit', {category: result.rows[0], message: message});
+              res.render('admin/categories/edit', {category: result.rows[0], message: message, user: req.user});
             }
             else{
               res.send(404, "Not found");
@@ -103,7 +103,7 @@ var categoriesController = {
           })
         }
         else{
-          res.redirect('/admin/categories');
+          res.redirect('/admin/categories', {user: req.user});
         }
       })
     }
