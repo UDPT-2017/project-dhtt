@@ -93,12 +93,12 @@ app.get('/auth/facebook/callback',
   function(req, res) {
     res.redirect('/');
   });
-/*
-app.get('/logout', function(req, res){
+
+app.get('/logoutFB', function(req, res){
   req.logout();
   res.redirect('/');
 });
-*/
+
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
   res.redirect('/')
