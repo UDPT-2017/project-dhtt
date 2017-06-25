@@ -22,12 +22,12 @@ var sessionsController = {
           else
           {
             message.error = "Invalid password!";
-           res.render('sessions/new', {message: message});
+           res.render('admin/login/index', {message: message});
           }
         }
         else{
           message.error = "Invalid email";
-          res.render('sessions/new', {message: message});
+          res.render('admin/login/index', {message: message});
         }
     });
   },
