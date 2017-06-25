@@ -118,7 +118,7 @@ var promotionController = {
             res.render('admin/promotions/index', {message: message, user: req.user})
           }
           else{
-            res.redirect('/admin/promotions', {user: req.user});
+            res.redirect('/admin/promotions');
           }
         })
       
@@ -172,7 +172,7 @@ var promotionController = {
         })
           }
           else{
-            res.redirect('/admin/promotions', {user: req.user});
+            res.redirect('/admin/promotions');
           }
         })
       

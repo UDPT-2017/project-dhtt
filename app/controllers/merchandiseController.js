@@ -1,4 +1,3 @@
-
 var bodyParser = require('body-parser');
 var merchandise = require('../models/merchandise');
 var categories = require('../models/categories');
@@ -102,8 +101,8 @@ var merchandiseController = {
     item.description = req.body.description;
     item.price = req.body.price;
     item.category_id = req.body.cate_id;
-    console.log(req.files);
-    if(typeof req.files =="undefined"){
+    console.log(item.category_id);
+    if(typeof req.files != "undefined"){
       item.image = req.files[0].filename;
     }
     var message = {};
@@ -123,7 +122,7 @@ var merchandiseController = {
             res.render('admin/merchandise/index', {message: message, user: req.user})
           }
           else{
-            res.redirect('/admin/merchandise', {user: req.user});
+            res.redirect('/admin/merchandise');
           }
         })
       }
@@ -188,7 +187,7 @@ var merchandiseController = {
         })
           }
           else{
-            res.redirect('/admin/merchandise', {user: req.user});
+            res.redirect('/admin/merchandise');
           }
         })
       }

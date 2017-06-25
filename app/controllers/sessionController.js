@@ -37,7 +37,7 @@ var sessionController = {
               for(i = 0; i< result.rowCount; i++){
                 session.item[i].price = result.rows[i].price;
                 session.item[i].name = result.rows[i].name;
-                session.total += result.rows[i].price;
+                session.total += parseInt(result.rows[i].price);
               }
               res.render('cart/checkout', {production: result.rows, categories: categories.rows, url: url});
             }
@@ -59,7 +59,7 @@ var sessionController = {
 
     var id = parseInt(req.params.id) - 1;
     session = req.session;
-    session.total = session.total + session.total/session.item[id].quantity;
+    session.total = parseInt(session.total) + parseInt(session.total)/parseInt(session.item[id].quantity);
     session.item[id].quantity += 1;
     res.status(200).send({items: session.item, total: session.total});
   },
@@ -67,7 +67,7 @@ var sessionController = {
     var url = req.protocol + '://' + req.get('host');
     var id = parseInt(req.params.id) - 1;
     session = req.session;
-    session.total = session.total + session.total/session.item[id].quantity;
+    session.total = parseInt(session.total) - parseInt(session.total)/parseInt(session.item[id].quantity);
     session.item[id].quantity -= 1;
     res.status(200).send({items: session.item, total: session.total, url: url});
   }

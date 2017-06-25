@@ -18,10 +18,12 @@
         <option value = "0" id="category_id" name="category_id">
           All
         </option>
+        <% if @categories?.length : %>
         <% for category in @categories : %>
           <option value="<%= category.id %>" id="category_id" name="category_id">
             <%= category.name %>
           </option>
+        <% end %>
         <% end %>
       </select>
     <button type="submit" class="btn btn-primary" id="filter_merchandise">Filter</button>
@@ -96,11 +98,13 @@
           <div class="form-group">
             <label for="recipient-name" class="control-label">Category</label>
             <select id="cate_id" name="cate_id">
+            <% if @categories : %>
               <% for cate in @categories : %>
                 <option value="<%= cate.id %>" id="cate_id" name="cate_id">
                   <%= cate.name %>
                 </option>
               <% end %>
+            <% end %>
             </select>
           </div>
           <div class="form-group">

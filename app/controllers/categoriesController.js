@@ -38,7 +38,7 @@ var categoriesController = {
           res.render('admin/categories/index', {message: message, user: req.user})
         }
         else{
-          res.redirect('/admin/categories', {user: req.user});
+          res.redirect('/admin/categories');
         }
       })
     }
@@ -109,7 +109,7 @@ var categoriesController = {
           })
         }
         else{
-          res.redirect('/admin/categories', {user: req.user});
+          res.redirect('/admin/categories');
         }
       })
     }

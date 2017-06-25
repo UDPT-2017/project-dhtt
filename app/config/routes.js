@@ -7,6 +7,7 @@ var promotionsController = require('../controllers/promotionController');
 var userSignupController = require('../controllers/userSignupController');
 var sessionsController = require('../controllers/sessionsController');
 var loginAdminControler = require('../controllers/loginAdminController');
+var searchController = require('../controllers/searchProductController');
 var multer  = require('multer');
 var upload = multer({ dest: 'app/public/uploads/'});
 var sessionController = require('../controllers/sessionController');
@@ -61,6 +62,8 @@ var configRoutes = function(app){
   app.post('/admin/login', loginAdminControler.login);
   app.get('/logout', sessionsController.logout);
   app.get('/admin/logout', loginAdminControler.logout);
+
+  app.get('/search', searchController.index);
 };
 
 module.exports = configRoutes;
