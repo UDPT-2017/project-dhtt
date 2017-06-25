@@ -1,0 +1,75 @@
+  <% extend '../views/shared/layout' %>
+
+  <div class="checkout">
+    <div class="container">
+    <div class="title">
+    <% if session.item : %>
+      <h3>Your shopping cart contains: <span><%= session.item.length %> Products</span></h3>
+    <% else : %>
+      <h3>Your shopping cart contains: <span>0 Product</span></h3>
+    <% end %>
+    </div>
+      <div class="checkout-right">
+        <table class="timetable_sub">
+          <thead>
+            <tr>
+              <th>SL No.</th>
+              <th>Product</th>
+              <th>Quality</th>
+              <th>Product Name</th>
+              <th>Unit Price</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% if @production?.length : %>
+            <% for item in @production : %>
+          <tr class="rem1">
+            <td class="invert"><%= item.rnum %></td>
+            <% if item.image : %>
+              <td class="invert-image"><img src="<%= @url %>/uploads/<%= item.image %>" alt=" " class="img-responsive" /></td>
+            <% else : %>
+              <td class="invert-image"><img src="<%= @url %>/images/no-image.png" alt=" " class="img-responsive" /></td>
+            <% end %>
+            <div class="items">
+              <td class="invert quantity_item" id="<%= item.rnum %>">
+                 <div class="quantity">
+                  <div class="quantity-select">
+                    <div class="entry value-minus">&nbsp;</div>
+                    <div class="entry value"><span><%= session.item[item.rnum - 1].quantity %></span></div>
+                    <div class="entry value-plus active">&nbsp;</div>
+                  </div>
+                </div>
+              </td>
+            </div>
+            <td class="invert"><%= item.name %></td>
+            <td class="invert">$<%= item.price %></td>
+          </tr>
+                <!--quantity-->
+
+                <!--quantity-->
+            <% end %>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="checkout-left">
+        <div class="checkout-left-basket">
+          <h4>Continue to basket</h4>
+          <ul>
+            <% if @production?.length : %>
+              <div class="total1">
+              <% for item in @production : %>
+                <li><%= item.name %> <i>-</i> <span id="<%= item.id %>">$<%= session.item[item.rnum - 1].price %></span></li>
+              <% end %>
+              <li>Total <i>-</i> <span>$<%= session.total %></span></li>
+              </div>
+            <% end %>
+          </ul>
+        </div>
+        <div class="checkout-right-basket">
+          <a href="products.html"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Continue Shopping</a>
+        </div>
+        <div class="clearfix"> </div>
+      </div>
+    </div>
+  </div>
