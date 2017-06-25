@@ -40,25 +40,10 @@ var configRoutes = function(app){
 
   app.get('/categories/:id/merchandise', homeController.categories_merchandise);
   app.get('/merchandise/:id', merchandiseController.showMerchandise);
-
-  app.get('/admin/promotions', promotionsController.index);
-  app.post('/admin/promotions', promotionsController.create);
-  app.delete('/admin/promotions/:id', promotionsController.delete);
-  app.get('/admin/promotions/:id/edit', promotionsController.getPromotions);
-  app.post('/admin/promotions/:id/edit', promotionsController.edit);
-  app.get('/admin/promotions/:search_string', promotionsController.promotions_search);
-
-  app.get('/signup', function(req, res){
-    res.render('signup');
-  });
-  app.post('/signup', userSignupController.signup);
-
-  app.post('/login', sessionsController.login);
-  app.post('/admin/login', loginAdminControler.login);
-  app.get('/logout', sessionsController.logout);
-  app.get('/admin/logout', loginAdminControler.logout);
   app.get('/addToCart/:id', sessionController.addItem);
-
+  app.get('/cart', sessionController.showItemCart);
+  app.get('/cart/plus/:id', sessionController.changePlus);
+  app.get('/cart/minus/:id', sessionController.changeMinus);
 };
 
 module.exports = configRoutes;

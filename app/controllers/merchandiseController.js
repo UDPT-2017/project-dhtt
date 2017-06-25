@@ -1,3 +1,4 @@
+
 var bodyParser = require('body-parser');
 var merchandise = require('../models/merchandise');
 var categories = require('../models/categories');

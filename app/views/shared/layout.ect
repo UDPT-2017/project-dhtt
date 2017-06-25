@@ -176,7 +176,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
       </div>
       <div class="cart box_1">
-        <a href="checkout.html">
+        <a href="<%= @url %>/cart">
           <div class="total">
           <% if (typeof session != "undefined") && session.item : %>
             <span class="simpleCart_total"></span><span id="simpleCart_quantity" class="simpleCart_quantity"><%= session.item.length %></span> items</div>
@@ -332,6 +332,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     })
 </script>
   <script src="<%= @url %>/js/cart.js"></script>
+
 <!-- //footer -->
 </body>
 
