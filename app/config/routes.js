@@ -16,6 +16,9 @@ var configRoutes = function(app){
   app.get('/admin', function(req, res){
     res.render('admin/login/index');
   });
+  app.get('/admin/login', function(req, res){
+    res.render('admin/login/index');
+  });
   app.get('/admin/categories', categoriesController.index);
   app.post('/admin/categories', categoriesController.create);
   app.delete('/admin/categories/:id', categoriesController.delete);

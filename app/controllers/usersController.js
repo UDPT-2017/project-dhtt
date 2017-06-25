@@ -3,6 +3,11 @@ var users = require('../models/users');
 
 var usersController = {
   index: function(req, res){
+    if(typeof session == "undefined" || session == null)
+    {
+      res.redirect('login');
+    }
+    else {
     users.index(function(users){
       if(users){
         res.render('admin/users/index', {users: users.rows, user: req.user});
@@ -11,6 +16,7 @@ var usersController = {
         res.render('admin/users/index', {user: req.user});
       }
     })
+  }
   },
   delete: function(req, res){
     var id = req.params.id;

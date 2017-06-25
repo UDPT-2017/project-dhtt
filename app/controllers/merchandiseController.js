@@ -6,6 +6,11 @@ var path = require('path');
 
 var merchandiseController = {
   index: function(req, res){
+    if(typeof session == "undefined" || session == null)
+    {
+      res.redirect('login');
+    }
+    else {
     merchandise.index(function(items){
       if(items){
         categories.index(function(categories){
@@ -21,6 +26,7 @@ var merchandiseController = {
         res.render('admin/merchandise/index', {user: req.user});
       }
     })
+  }
   },
   delete: function(req, res){
     var id = req.params.id;
