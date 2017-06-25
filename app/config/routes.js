@@ -9,6 +9,7 @@ var sessionsController = require('../controllers/sessionsController');
 var loginAdminControler = require('../controllers/loginAdminController');
 var multer  = require('multer');
 var upload = multer({ dest: 'app/public/uploads/'});
+var sessionController = require('../controllers/sessionController');
 
 var configRoutes = function(app){
   app.get('/', homeController.index);
@@ -56,6 +57,8 @@ var configRoutes = function(app){
   app.post('/admin/login', loginAdminControler.login);
   app.get('/logout', sessionsController.logout);
   app.get('/admin/logout', loginAdminControler.logout);
+  app.get('/addToCart/:id', sessionController.addItem);
+
 };
 
 module.exports = configRoutes;

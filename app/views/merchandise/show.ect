@@ -15,8 +15,8 @@
               </div>
         </div>
         <!-- flixslider -->
-          <script defer src="js/jquery.flexslider.js"></script>
-          <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" />
+          <script defer src="<%= @url %>/js/jquery.flexslider.js"></script>
+          <link rel="stylesheet" href="<%= @url %>/css/flexslider.css" type="text/css" media="screen" />
           <script>
           // Can also be used with $(document).ready()
           $(window).load(function() {
@@ -28,7 +28,7 @@
           </script>
         <!-- flixslider -->
         <!-- zooming-effect -->
-          <script src="js/imagezoom.js"></script>
+          <script src="<%= @url %>/js/imagezoom.js"></script>
         <!-- //zooming-effect -->
       </div>
       <div class="col-md-8 single-right">
@@ -39,33 +39,6 @@
               <%= @merchandise.description %>
             </p>
           </div>
-          <div class="color-quality">
-            <div class="color-quality-right">
-              <h5>Quality :</h5>
-               <div class="quantity">
-                <div class="quantity-select">
-                  <div class="entry value-minus1">&nbsp;</div>
-                  <div class="entry value1"><span>1</span></div>
-                  <div class="entry value-plus1 active">&nbsp;</div>
-                </div>
-              </div>
-              <!--quantity-->
-                  <script>
-                  $('.value-plus1').on('click', function(){
-                    var divUpd = $(this).parent().find('.value1'), newVal = parseInt(divUpd.text(), 10)+1;
-                    divUpd.text(newVal);
-                  });
-
-                  $('.value-minus1').on('click', function(){
-                    var divUpd = $(this).parent().find('.value1'), newVal = parseInt(divUpd.text(), 10)-1;
-                    if(newVal>=1) divUpd.text(newVal);
-                  });
-                  </script>
-                <!--quantity-->
-
-            </div>
-            <div class="clearfix"> </div>
-          </div>
           <div class="simpleCart_shelfItem">
             <% if @merchandise.dicount : %>
               <p><span><%= @merchandise.price %></span> <i class="item_price">
@@ -73,7 +46,7 @@
             <% else : %>
               <p><i class="item_price">$<%= @merchandise.price %></i></p>
             <% end %>
-              <p><a class="item_add" href="#">Add to cart</a></p>
+              <p><a class="item_add" href="#" id="<%= @merchandise.id %>">Add to cart</a></p>
           </div>
 
       </div>
