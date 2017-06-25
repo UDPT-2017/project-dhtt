@@ -18,7 +18,7 @@ var userSignupController = {
       users.signup(user,function(error){
           if(error){
             message.error = error.detail;
-            res.render('home', {message: message});
+            res.render('home', {message: message, user: req.user});
           }
           else{
             message.success= "Đăng kí tài khoản thành công";
@@ -28,7 +28,7 @@ var userSignupController = {
                 if(categories){
                   merchandise.bargain(function(bargain){
                     if(bargain){
-                      res.render('home', {merchandise: items.rows, categories: categories.rows, bargains: bargain.rows, url: url, user: req.user, message: message});
+                      res.render('home', {merchandise: items.rows, categories: categories.rows, bargains: bargain.rows, url: url, user: req.user, message: message, user: req.user});
                     }
                   })
 
@@ -39,7 +39,7 @@ var userSignupController = {
               })
             }
           else{
-            res.render('home', {user: req.user, merchandise: '', categories: '', bargains: ''});
+            res.render('home', {user: req.user, merchandise: '', categories: '', bargains: '', user: req.user});
           }
           })
         }
@@ -53,18 +53,18 @@ var userSignupController = {
                 if(categories){
                   merchandise.bargain(function(bargain){
                     if(bargain){
-                      res.render('home', {merchandise: items.rows, categories: categories.rows, bargains: bargain.rows, url: url, user: req.user, message: message});
+                      res.render('home', {merchandise: items.rows, categories: categories.rows, bargains: bargain.rows, url: url, user: req.user, message: message, user: req.user});
                     }
                   })
 
                 }
                 else{
-                  res.render('home', {merchandise: merchandise.rows, categories: '', bargains: '',  user: req.user, message: message});
+                  res.render('home', {merchandise: merchandise.rows, categories: '', bargains: '',  user: req.user, message: message, user: req.user});
                 }
               })
             }
           else{
-            res.render('home', {user: req.user, merchandise: '', categories: '', bargains: '', message: message});
+            res.render('home', {user: req.user, merchandise: '', categories: '', bargains: '', message: message, user: req.user});
           }
           })
     }

@@ -5,10 +5,10 @@ var usersController = {
   index: function(req, res){
     users.index(function(users){
       if(users){
-        res.render('admin/users/index', {users: users.rows});
+        res.render('admin/users/index', {users: users.rows, user: req.user});
       }
       else{
-        res.render('admin/users/index');
+        res.render('admin/users/index', {user: req.user});
       }
     })
   },
@@ -18,7 +18,7 @@ var usersController = {
     users.delete(id, function(error){
       if(error){
         message.error = "Delete failed";
-        res.render('admin/users/index', {message: message});
+        res.render('admin/users/index', {message: message, user: req.user});
       }
       else{
         users.index(function(users){
@@ -26,7 +26,7 @@ var usersController = {
             res.send({users: users.rows});
           }
           else{
-            res.render('admin/users/index');
+            res.render('admin/users/index', {user: req.user});
           }
         })
       }

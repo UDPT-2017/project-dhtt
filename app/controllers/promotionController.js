@@ -11,15 +11,15 @@ var promotionController = {
       if(items){
         merchandise.index(function(merchandise){
           if(merchandise){
-            res.render('admin/promotions/index', {promotions: items.rows, merchandise: merchandise.rows});
+            res.render('admin/promotions/index', {promotions: items.rows, merchandise: merchandise.rows, user: req.user});
           }
           else{
-            res.render('admin/promotions/index', {promotions: promotions.rows});
+            res.render('admin/promotions/index', {promotions: promotions.rows, user: req.user});
           }
         })
       }
       else{
-        res.render('admin/promotions/index');
+        res.render('admin/promotions/index', {user: req.user});
       }
     })
   },
@@ -29,7 +29,7 @@ var promotionController = {
     promotions.delete(id, function(error){
       if(error){
         message.error = "Delete failed";
-        res.render('admin/promotions/index', {message: message});
+        res.render('admin/promotions/index', {message: message, user: req.user});
       }
       else{
         promotions.index(function(items){
@@ -37,7 +37,7 @@ var promotionController = {
             res.send({promotions: items.rows});
           }
           else{
-            res.render('admin/promotions/index');
+            res.render('admin/promotions/index', {user: req.user});
           }
         })
       }
@@ -100,7 +100,7 @@ var promotionController = {
     var message = {};
     if(validator.isEmpty(item.discount)){
       message.error = "Discount cannot blank!";
-      res.render('admin/promotions/index', {message: message});
+      res.render('admin/promotions/index', {message: message, user: req.user});
     }
     else{
 
@@ -109,10 +109,10 @@ var promotionController = {
         promotions.create(item, function(error){
           if(error){
             message.error = "Create promotions failed!";
-            res.render('admin/promotions/index', {message: message})
+            res.render('admin/promotions/index', {message: message, user: req.user})
           }
           else{
-            res.redirect('/admin/promotions');
+            res.redirect('/admin/promotions', {user: req.user});
           }
         })
       
@@ -125,10 +125,10 @@ var promotionController = {
       if(items){
         merchandise.index(function(cate){
           if(cate){
-            res.render('admin/promotions/edit', {promotions: items.rows[0], merchandise: cate.rows});
+            res.render('admin/promotions/edit', {promotions: items.rows[0], merchandise: cate.rows, user: req.user});
           }
           else{
-            res.render('admin/promotions/edit', {promotions: items.rows[0]});
+            res.render('admin/promotions/edit', {promotions: items.rows[0], user: req.user});
           }
         })
       }
@@ -150,7 +150,7 @@ var promotionController = {
       message.error = "Discount cannot blank!";
       merchandise.index(function(merchandise){
           if(merchandise){
-            res.render('admin/promotions/edit', {message: message, merchandise: merchandise.rows, promotions: item});
+            res.render('admin/promotions/edit', {message: message, merchandise: merchandise.rows, promotions: item, user: req.user});
           }
         })
     }
@@ -161,12 +161,12 @@ var promotionController = {
             console.log(error);
             merchandise.index(function(merchandise){
             if(merchandise){
-              res.render('admin/promotions/edit', {message: message, merchandise: merchandise.rows, promotions: item});
+              res.render('admin/promotions/edit', {message: message, merchandise: merchandise.rows, promotions: item, user: req.user});
             }
         })
           }
           else{
-            res.redirect('/admin/promotions');
+            res.redirect('/admin/promotions', {user: req.user});
           }
         })
       

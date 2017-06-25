@@ -17,7 +17,7 @@ var sessionsController = {
           {
             message.success = "Login successfully!";
             session.user = result.rows[0];
-            res.redirect('/');
+            res.redirect('/', {user: req.user});
           }
           else
           {
@@ -35,7 +35,7 @@ var sessionsController = {
     message = {};
     session = null;
     message.success = "Log out successfully!";
-    res.redirect('/');
+    res.redirect('/', {user: req.user});
   }
 }
 
