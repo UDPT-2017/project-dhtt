@@ -1,0 +1,81 @@
+<% extend '../views/admin/dashboard/layout' %>
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Categories
+        </h1>
+        <ol class="breadcrumb">
+            <li class="active">
+                <i class="fa fa-dashboard"></i> Categories
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+  <div class="col-md-6 col-offset-md-6">
+    <input type="search" name="q" placeholder="Search" id="string_search">
+    <input type="submit" value="Search" id="category_search">
+  </div>
+</div>
+<table class="table">
+  <thead class="thead-inverse">
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Manage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @categories?.length : %>
+      <% for category in @categories : %>
+        <tr >
+          <th scope="row"><%= category.rnum %></th>
+          <td><%= category.name %></td>
+          <td><%= category.description %></td>
+          <td>
+            <div class="row">
+              <div class="col-md-2">
+                <form class="form-horizontal" role="form" method="get"
+                action="categories/<%= category.id %>/edit">
+                  <button type="submit" class="btn btn-secondary">Edit</button>
+                </form>
+              </div>
+              <div class="col-md-6 col-offset-md-2">
+                <button type="button" class="btn btn-danger delete_category" data-id="<%= category.id %>">Delete</button>
+              </div>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCategory" data-whatever="@mdo">Add</button>
+
+<div class="modal fade" id="addCategory" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">New category</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="control-label">Name:</label>
+            <input type="text" class="form-control" id="name" name="name">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="control-label">Description:</label>
+            <textarea class="form-control" id="description" name="description"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="create_category">Create</button>
+      </div>
+    </div>
+  </div>
+</div>
