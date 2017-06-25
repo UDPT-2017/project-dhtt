@@ -18,6 +18,26 @@ var userSignupController = {
       users.signup(user,function(error){
           if(error){
             message.error = error.detail;
+            merchandise.home(function(items){
+              if(items){
+              categories.index(function(categories){
+                if(categories){
+                  merchandise.bargain(function(bargain){
+                    if(bargain){
+                      res.render('home', {merchandise: items.rows, categories: categories.rows, bargains: bargain.rows, url: url, user: req.user, message: message});
+                    }
+                  })
+
+                }
+                else{
+                  res.render('home', {merchandise: merchandise.rows, categories: '', bargains: ''});
+                }
+              })
+            }
+          else{
+            res.render('home', {user: req.user, merchandise: '', categories: '', bargains: '', user: req.user});
+          }
+          })
             res.render('home', {message: message, user: req.user});
           }
           else{

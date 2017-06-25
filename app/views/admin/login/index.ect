@@ -13,6 +13,17 @@
   <li class="breadcrumb-item"><a href="">Admin</a></li>
   <li class="breadcrumb-item active">Log in</li>
 </ol>
+  <% if @message : %>
+                    <% if @message.error : %>
+                    <p class="alert alert-danger">
+                      <%= @message.error %>
+                    </p>
+                    <% else : %>
+                    <p class="alert alert-success">
+                      <%= @message.success %>
+                    </p>
+                    <% end %>
+                <% end %>
   <form method="post" action="/admin/login">
     <h2 align="center">Log in</h2>
     <div class="form-group row">

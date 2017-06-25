@@ -76,9 +76,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 </li>
                               </ul>
                             <% end %>
-                            <% unless @user : %>
-                              <input type="submit" value="Sign in"/>
-                            <% else if @user : %>
+                            <% if @user : %>
                               <ul class="nav navbar-right top-nav" style="margin-top: -165px;">
                                 <li class="dropdown">
                                     <a href="/logoutFB"><i class="fa fa-fw fa-power-off">
@@ -178,7 +176,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
       <div class="cart box_1">
         <a href="<%= @url %>/cart">
           <div class="total">
-          <% if (typeof session != "undefined") && session.item : %>
+          <% if typeof session != "undefined" && session && session.item : %>
             <span class="simpleCart_total"></span><span id="simpleCart_quantity" class="simpleCart_quantity"><%= session.item.length %></span> items</div>
             <img src="<%= @url %>/images/bag.png" alt="" />
           <% else : %>

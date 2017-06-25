@@ -10,6 +10,6 @@ module.exports={
   "use_database"        :       "true",
   "host"                :       "localhost:5432",
   "username"            :       "postgres",
-  "password"            :       "123456",
+  "password"            :       "",
   "database"            :       "projectUDPT"
 };
